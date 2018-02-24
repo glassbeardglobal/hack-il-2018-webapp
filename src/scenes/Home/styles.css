@@ -1,0 +1,36 @@
+.home {
+  opacity: 0;
+}
+
+.home .appbar {
+  position: absolute;
+  margin-right: 470px;
+  width: calc(100% - 470px);
+  background-color: white;
+  color: #546A7B;
+}
+
+.main {
+  margin-right: 440px;
+}
+
+.exp-drawer {
+  width: 420px;
+  padding: 5px 10px;
+}
+
+.exp-drawer h1 {
+  font-weight: 500;
+  font-size: 2.5rem;
+  text-align: center;
+  text-shadow: -2px 2px 9px rgba(0,0,0,0.2);
+}
+
+.card-container {
+  margin: auto;
+}
+
+.card-container .exp-card {
+  margin: 25px 10px;
+  cursor: pointer;
+}

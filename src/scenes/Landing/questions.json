@@ -1,0 +1,14 @@
+{
+	"0": {
+		"q": "What's your name?",
+		"a": "Noah Lebovic"
+	},
+	"1": {
+		"q": "How old are you?",
+		"a": 19
+	},
+	"2": {
+		"q": "What do you want to do?",
+		"a": "Default not used"
+	}
+}

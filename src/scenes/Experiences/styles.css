@@ -1,0 +1,57 @@
+.experience {
+  padding: 16px;
+}
+
+.experience .title {
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 40px;
+}
+
+.experience .title .heading {
+  font-size: 1em !important;
+  box-sizing: border-box;
+}
+
+.grid-right {
+  padding: 12px;
+}
+
+.overview {
+}
+
+.overview .section {
+  margin-bottom: 16px;
+}
+
+.overview .info {
+  font-family: Helvetica Neue !important;
+  font-size: 19px !important;
+  line-height: 24px;
+  font-weight: 300;
+  padding-left: 12px;
+  display: inline-flex;
+  vertical-align: bottom;
+}
+
+.description {
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.description .heading {
+  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
+  font-weight: normal;
+  color: #484848;
+  line-height: 24px;
+  font-size: 19px;
+  margin-bottom: 16px;
+}
+
+.description .text {
+  font-size: 19px;
+  font-family: Helvetica Neue;
+  font-weight: 300;
+  color: #484848;
+}

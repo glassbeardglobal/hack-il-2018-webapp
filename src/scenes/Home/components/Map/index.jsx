@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps"
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Marker,
+} from 'react-google-maps';
 
 class GMap extends Component {
   constructor(props) {
@@ -7,21 +12,34 @@ class GMap extends Component {
     this.state = {
       open: false,
       selectedLot: null,
-    }
+    };
+
+    this.mapRef = null;
+  }
+
+  componentDidUpdate() {
+    setTimeout(() => this.setCenter(this.props.center), 100);
+  }
+
+  setCenter(center) {
+    this.mapRef.panTo(center);
   }
 
   render() {
-    const center = {
-      lat: 40.107511,
-      lng: -88.232884,
-    };
+    const markers = this.props.experiences.map(e => (
+      <Marker key={e.title} position={{ lat: e.lat, lng: e.lng }} />
+    ));
 
     return (
       <div>
         <GoogleMap
-          defaultZoom={6.8}
-          defaultCenter={center}
+          ref={mapRef => {
+            this.mapRef = mapRef;
+          }}
+          defaultZoom={4.8}
+          defaultCenter={this.props.center}
         />
+        {markers}
       </div>
     );
   }
@@ -29,13 +47,17 @@ class GMap extends Component {
 
 const GMapContainer = withScriptjs(withGoogleMap(GMap));
 
-const Map = () => (
-  <GMapContainer
-    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0p4tcXgvmPZFWGi684Q1WaRAGN6dwc30"
-    loadingElement={<div />}
-    containerElement={<div style={{ height: '100vh', width: '100%' }}/>}
-    mapElement={<div style={{ height: '100%' }}/>}
-  />
-)
+const Map = props => {
+  return (
+    <GMapContainer
+      googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0p4tcXgvmPZFWGi684Q1WaRAGN6dwc30"
+      loadingElement={<div />}
+      containerElement={<div style={{ height: '100vh', width: '100%' }} />}
+      mapElement={<div style={{ height: '100%' }} />}
+      center={props.center}
+      experiences={props.experiences}
+    />
+  );
+};
 
 export default Map;

@@ -1,0 +1,202 @@
+.loading-text {
+  position: absolute;
+  text-align: center;
+  margin-top: 58vh;
+  width: 100vw;
+}
+
+#cssload-loader {
+  position: absolute;
+  margin: auto;
+  margin-top: 50vh;
+  left: 0;
+  right: 0;
+  width: 135px;
+}
+#cssload-loader ul {
+  margin: 0;
+  list-style: none;
+  width: 135px;
+  height: 98px;
+  position: relative;
+  padding: 0;
+  height: 15px;
+}
+#cssload-loader ul li {
+  position: absolute;
+  width: 3px;
+  height: 0;
+  background-color: rgb(51,55,133);
+  bottom: 0;
+}
+
+
+#cssload-loader li:nth-child(1) {
+  left: 0;
+  animation: cssload-sequence1 1.3s ease infinite 0;
+    -o-animation: cssload-sequence1 1.3s ease infinite 0;
+    -ms-animation: cssload-sequence1 1.3s ease infinite 0;
+    -webkit-animation: cssload-sequence1 1.3s ease infinite 0;
+    -moz-animation: cssload-sequence1 1.3s ease infinite 0;
+}
+#cssload-loader li:nth-child(2) {
+  left: 23px;
+  animation: cssload-sequence2 1.3s ease infinite 0.13s;
+    -o-animation: cssload-sequence2 1.3s ease infinite 0.13s;
+    -ms-animation: cssload-sequence2 1.3s ease infinite 0.13s;
+    -webkit-animation: cssload-sequence2 1.3s ease infinite 0.13s;
+    -moz-animation: cssload-sequence2 1.3s ease infinite 0.13s;
+}
+#cssload-loader li:nth-child(3) {
+  left: 45px;
+  animation: cssload-sequence1 1.3s ease-in-out infinite 0.26s;
+    -o-animation: cssload-sequence1 1.3s ease-in-out infinite 0.26s;
+    -ms-animation: cssload-sequence1 1.3s ease-in-out infinite 0.26s;
+    -webkit-animation: cssload-sequence1 1.3s ease-in-out infinite 0.26s;
+    -moz-animation: cssload-sequence1 1.3s ease-in-out infinite 0.26s;
+}
+#cssload-loader li:nth-child(4) {
+  left: 68px;
+  animation: cssload-sequence2 1.3s ease-in infinite 0.39s;
+    -o-animation: cssload-sequence2 1.3s ease-in infinite 0.39s;
+    -ms-animation: cssload-sequence2 1.3s ease-in infinite 0.39s;
+    -webkit-animation: cssload-sequence2 1.3s ease-in infinite 0.39s;
+    -moz-animation: cssload-sequence2 1.3s ease-in infinite 0.39s;
+}
+#cssload-loader li:nth-child(5) {
+  left: 90px;
+  animation: cssload-sequence1 1.3s ease-in-out infinite 0.52s;
+    -o-animation: cssload-sequence1 1.3s ease-in-out infinite 0.52s;
+    -ms-animation: cssload-sequence1 1.3s ease-in-out infinite 0.52s;
+    -webkit-animation: cssload-sequence1 1.3s ease-in-out infinite 0.52s;
+    -moz-animation: cssload-sequence1 1.3s ease-in-out infinite 0.52s;
+}
+#cssload-loader li:nth-child(6) {
+  left: 113px;
+  animation: cssload-sequence2 1.3s ease infinite 0.65s;
+    -o-animation: cssload-sequence2 1.3s ease infinite 0.65s;
+    -ms-animation: cssload-sequence2 1.3s ease infinite 0.65s;
+    -webkit-animation: cssload-sequence2 1.3s ease infinite 0.65s;
+    -moz-animation: cssload-sequence2 1.3s ease infinite 0.65s;
+}
+
+
+@keyframes cssload-sequence1 {
+  0% {
+    height: 15px;
+  }
+  50% {
+    height: 75px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+
+@-o-keyframes cssload-sequence1 {
+  0% {
+    height: 15px;
+  }
+  50% {
+    height: 75px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+
+@-ms-keyframes cssload-sequence1 {
+  0% {
+    height: 15px;
+  }
+  50% {
+    height: 75px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+
+@-webkit-keyframes cssload-sequence1 {
+  0% {
+    height: 15px;
+  }
+  50% {
+    height: 75px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+
+@-moz-keyframes cssload-sequence1 {
+  0% {
+    height: 15px;
+  }
+  50% {
+    height: 75px;
+  }
+  100% {
+    height: 15px;
+  }
+}
+
+@keyframes cssload-sequence2 {
+  0% {
+    height: 30px;
+  }
+  50% {
+    height: 98px;
+  }
+  100% {
+    height: 30px;
+  }
+}
+
+@-o-keyframes cssload-sequence2 {
+  0% {
+    height: 30px;
+  }
+  50% {
+    height: 98px;
+  }
+  100% {
+    height: 30px;
+  }
+}
+
+@-ms-keyframes cssload-sequence2 {
+  0% {
+    height: 30px;
+  }
+  50% {
+    height: 98px;
+  }
+  100% {
+    height: 30px;
+  }
+}
+
+@-webkit-keyframes cssload-sequence2 {
+  0% {
+    height: 30px;
+  }
+  50% {
+    height: 98px;
+  }
+  100% {
+    height: 30px;
+  }
+}
+
+@-moz-keyframes cssload-sequence2 {
+  0% {
+    height: 30px;
+  }
+  50% {
+    height: 98px;
+  }
+  100% {
+    height: 30px;
+  }
+}

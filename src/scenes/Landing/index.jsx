@@ -20,12 +20,12 @@ class Landing extends Component {
   }
 
   componentDidMount() {
-    console.log('main', document.getElementById('main'));
     const image = rawImages[Math.floor(Math.random() * 4)];
     if (document.getElementById('main')) {
       document.getElementById('main').style.backgroundImage =
         `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9) ), url('${image}')`;
     }
+    this.inputRef ? this.inputRef.focus() : null;
   }
 
   expandInput(w) {
@@ -33,24 +33,23 @@ class Landing extends Component {
       inputStyle: {
         width: w,
       }
-    })
-  }
-
-  handleChange(e) {
-    console.log('keystroke', e);
-    this.setState({
-      answers: {
-        [this.state.questionIndex]: e.target.value
-      },
     });
+    this.inputRef ? this.inputRef.focus() : null;
   }
 
   handleKeyPress(e) {
-    const { questionIndex } = this.state;
+    const { questionIndex, answers, questions } = this.state;
     if (e.key === 'Enter') {
+      if (questionIndex === Object.keys(questions).length - 1) {
+        this.props.history.push('/home');
+      }
       this.setState({
         inputStyle: {
           width: '0%',
+        },
+        answers: {
+          ...answers,
+          [questionIndex]: e.target.value
         },
         questionIndex: questionIndex + 1,
       });
@@ -60,19 +59,18 @@ class Landing extends Component {
 
   renderInput = (inputStyle, questions, answers, questionIndex) =>
     (<input
-      style={ console.log(answers[questionIndex]) || inputStyle }
+      ref={ (r) => this.inputRef = r }
+      style={ inputStyle }
       key={ questionIndex }
       className="input"
       type="text"
       placeholder={ questions[questionIndex].q }
       value={ answers[questionIndex] && answers[questionIndex].a }
-      onChange={ this.handleChange.bind(this) }
       onKeyPress={ this.handleKeyPress.bind(this) }
       onMouseEnter={this.expandInput.bind(this, '60%') }
     />)
 
   render() {
-    console.log('props', this.props, this.state);
     const { questionIndex, questions, answers, inputStyle } = this.state;
 
     return (

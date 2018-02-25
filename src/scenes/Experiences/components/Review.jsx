@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import Avatar from 'material-ui/Avatar';
+
+import '../styles.css';
 
 class Review extends Component {
   constructor(props) {
@@ -8,15 +11,15 @@ class Review extends Component {
 
   render() {
     const reviewerLink = `/reviewers/${this.props.reviewerId}`;
-    const imageLink = `../../assets/reviewer.jpg`;
 
     return (
-      <div>
-        <div>
-          <Avatar src={imageLink} />
-          <a style={{ font: 'Circular', fontSize: '14px' }} href={reviewerLink}>
-            {this.props.name}
-          </a>
+      <div className="review">
+        <div className="reviewer">
+          <Avatar src={require('../../../assets/reviewer.jpg')} />
+          <span className="name">{this.props.name}</span>
+        </div>
+        <div className="text">
+          {this.props.review}
         </div>
       </div>
     );

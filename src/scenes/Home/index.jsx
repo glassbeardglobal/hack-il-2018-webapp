@@ -23,6 +23,7 @@ class Home extends Component {
         lng: -98.5795,
       },
       data: [],
+      count: 0,
     };
   }
 
@@ -31,28 +32,31 @@ class Home extends Component {
     const params = queryParams['serialized'];
 
     this.props.getExperiences(params);
-
-    const tl = anime.timeline();
-    tl
-      .add({
-        targets: '.loader',
-        opacity: 0,
-        duration: 500,
-        offset: 17000,
-        easing: 'easeInOutSine',
-      })
-      .add({
-        targets: '.home',
-        opacity: 1,
-        duration: 500,
-        easing: 'easeInOutSine',
-        offset: '+= 500',
-      });
   }
 
   render() {
     const experiences = this.props.experiences.experiences;
     console.log(experiences);
+
+    if (this.props.experiences.fetchSuccess && this.state.count === 0) {
+      this.setState({ count: 1 });
+      const tl = anime.timeline();
+      tl
+        .add({
+          targets: '.loader',
+          opacity: 0,
+          duration: 500,
+          offset: 1000,
+          easing: 'easeInOutSine',
+        })
+        .add({
+          targets: '.home',
+          opacity: 1,
+          duration: 500,
+          easing: 'easeInOutSine',
+          offset: '+= 500',
+        });
+    }
 
     const expComps = experiences.map((e, i) => (
       <div

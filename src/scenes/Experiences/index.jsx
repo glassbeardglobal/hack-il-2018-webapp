@@ -1,67 +1,101 @@
 import React, { Component } from 'react';
 import Divider from 'material-ui/Divider';
+import AppBar from 'material-ui/AppBar';
+import Toolbar from 'material-ui/Toolbar';
+import Typography from 'material-ui/Typography';
+import Icon from 'material-ui/Icon';
 import Paper from 'material-ui/Paper';
 
 import Activity from './components/Activity';
 import Description from './components/Description';
 import ExperienceOverview from './components/ExperienceOverview';
-import PriceInfo from './components/PriceInfo';
+import json from './activities';
 import './styles.css';
 
 class Experience extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+    };
+    this.refreshPage = this.refreshPage.bind(this);
+  }
+
+  refreshPage() {
+    if (this.state.loading === true) {
+      this.setState({ loading: false });
+    }
+  }
+
   render() {
-    const title = "Experience the City of Chicago";
-    const hostName = `Noah Lebovic`;
-    const description = "Take in the view from the sky-high heights of the Willis Tower, the second-tallest building in the United States. From the 103rd floor, look out over 4 states and the Windy City's urban sprawl, and then test your vertigo on a glass balcony to peer down at the streets and skyscrapers of Chicago beneath your feet. Step into an elevator and be whisked to new heights in just 60 seconds, waiting for the ear-popping sensation as you ascend to the Skydeck at the Willis Tower. Standing 1,353 feet (412 m) above the Midwest metropolis, the Willis Tower’s steel-framed structure was specifically designed to withstand the city's infamous wind.";
-    const price = "63";
-    // <Review name="Noah Lebovic" reviewerId="1234" />
-    // <Description heading="About your host" text={description} />
-    //    <Divider />
-    //    <Description heading="Experience Location:" text={description} />
-    //    <Divider />
-    // <PriceInfo price={price} />
-    //<Review name="Noah Lebovic" reviewerId="1234" review="Amazing, wonderfull, génial, au top !!! Orignal, intéressant... Ne pas hésiter, foncez !" />
-    //      <Divider />
-    //      <Review name="John Smith" reviewerId="1234" review="Fabien was fantastic guiding the bike tour of Paris. Very informative and entertaining and helpful. Great way to get a feel for the city and discover some of its hidden corners - really enjoyed the experience. Martin from Edinburgh." />
-    //      <Divider />
-    //      <Review name="John Smith" reviewerId="1234" review="Fabien was fantastic guiding the bike tour of Paris. Very informative and entertaining and helpful. Great way to get a feel for the city and discover some of its hidden corners - really enjoyed the experience. Martin from Edinburgh." />
-    //      <Divider />
+    const title = json['title'];
+    const hostName = json['hostName'];
+    const experienceTime = json['experienceTime'];
+    const description = json['description'];
+    const image = json['image'];
+    const cost = json['cost'];
+    const departAirport = json['flight']['departAirport'];
+    const departDate = json['flight']['departDate'];
+    const departTime = json['flight']['departTime'];
+    const departTerminal = json['flight']['departTerminal'];
+    const arriveAirport = json['flight']['arriveAirport'];
+    const arriveDate = json['flight']['arriveDate'];
+    const arriveTime = json['flight']['arriveTime'];
+    const arriveTerminal = json['flight']['arriveTerminal'];
+    const activitiesJson = json['activities'];
+
+    const activities = activitiesJson.map((activity) =>
+      <Activity name={activity.name} desc={activity.desc} img={activity.img} />
+    );
 
     return (
-      <div className="experience">
-        <div className="title heading">
-          {title}
-          <br />
-          <span className="subtitle">Host: {hostName}</span>
+      <div>
+        <div className="experience-title">
+          <AppBar position="static">
+            <Toolbar>
+              <Typography variant="title" color="inherit">
+                {title}
+              </Typography>
+            </Toolbar>
+          </AppBar>
         </div>
 
-        <div className="grid">
-          <div float="left" className="grid-left">
-            <img src={require("../../assets/tower.jpg")} alt="Hills" align="left" className="resize" />
-          </div>
-          <div float="right" className="grid-right">
+        <div className="experience">
+          <div className="grid">
+            <img src={image} alt="Hills" align="left" className="resize" onLoad={this.refreshPage} key={this.state.loading} />
             <Paper elevation={4} className="paper">
-              <div className="paper">
                 <div className="heading">Overview:</div>
-                <ExperienceOverview location="Chicago" time="3 Days" cost="$175" />
+                <ExperienceOverview guide={hostName} time={experienceTime} cost={cost} />
                 <Divider />
                 <Description heading="Description:" text={description} />
+            </Paper>
+          </div>
+
+          <Divider />
+          <div className="section">
+            <h2>Flight:</h2>
+            <Paper elevation={4} className="flight-container">
+              <div className="info-container">
+                <h3 className="flight-info emph">{departAirport}</h3>
+                <div className="flight-info"><strong>Departing: </strong>{departDate}</div>
+                <div className="flight-info"><strong>Time: </strong>{departTime}</div>
+                <div className="flight-info"><strong>Terminal: </strong>{departTerminal}</div>
+              </div>
+              <Icon color="action" fontSize={true} className="flight-icon">airplanemode_active</Icon>
+              <div className="info-container">
+                <h3 className="flight-info emph">{arriveAirport}</h3>
+                <div className="flight-info"><strong>Returning: </strong>{arriveDate}</div>
+                <div className="flight-info"><strong>Time: </strong>{arriveTime}</div>
+                <div className="flight-info"><strong>Terminal: </strong>{arriveTerminal}</div>
               </div>
             </Paper>
           </div>
-        </div>
+          <Divider />
 
-        <Divider />
-
-        <div className="reviews">
-          <h2>Activities:</h2>
-          <Activity name="Activity #1" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus."/>
-          <Divider />
-          <Activity name="Activity #1" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus."/>
-          <Divider />
-          <Activity name="Activity #1" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus."/>
-          <Divider />
-          <Activity name="Activity #1" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus."/>
+          <div className="section">
+            <h2>Activities:</h2>
+            {activities}
+          </div>
           <Divider />
         </div>
       </div>

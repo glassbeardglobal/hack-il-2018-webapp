@@ -281,7 +281,7 @@ class Landing extends Component {
         className="landing"
         onKeyPress={this.handleGlobalKeyPress.bind(this)}
       >
-        <h1 className="app-name">xxxplore</h1>
+        <h1 className="app-name">Xplore</h1>
         {questions[questionOrder[questionIndex]].type !== 'check'
           ? this.renderInput(inputStyle, questions, answers, questionIndex)
           : this.renderChecks(questions, answers, questionIndex)}

@@ -49,14 +49,14 @@ class Home extends Component {
       .add({
         targets: '.loader',
         opacity: 0,
-        duration: 15000,
-        offset: 5000,
+        duration: 500,
+        offset: 17000,
         easing: 'easeInOutSine',
       })
       .add({
         targets: '.home',
         opacity: 1,
-        duration: 15000,
+        duration: 500,
         easing: 'easeInOutSine',
         offset: '+= 500',
       });

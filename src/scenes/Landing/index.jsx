@@ -8,8 +8,6 @@ import rawQuestions from './questions.json';
 import rawImages from './backgrounds.json';
 import serialize from '../../utils';
 import './styles.css';
-import urlFetchExperiences from '../../services/api/UrlExperience';
-
 
 const questionOrder = ["name", "initialCity", "budget", "date", "duration", "interests"];
 const interests = ["Zoos",
@@ -103,8 +101,8 @@ class Landing extends Component {
     const { questionIndex, questions } = this.state;
     if (e.key === 'Enter' && questionIndex === Object.keys(questions).length - 1) {
       const serializedBody = serialize(this.state.answers);
-      urlFetchExperiences(serializedBody);
-      this.props.history.push(`/home`);
+      // urlFetchExperiences(this.state.answers);
+      this.props.history.push(`/home?serialized=${serializedBody}`);
     } else if (e.key === 'Enter' && questionOrder[questionIndex] === 'date') {
       this.handleKeyPress(e);
     }

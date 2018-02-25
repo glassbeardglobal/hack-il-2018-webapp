@@ -8,13 +8,36 @@ import Paper from 'material-ui/Paper';
 import Activity from './components/Activity';
 import Description from './components/Description';
 import ExperienceOverview from './components/ExperienceOverview';
+import activitiesJson from './activities';
 import './styles.css';
 
 class Experience extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+    };
+    this.refreshPage = this.refreshPage.bind(this);
+  }
+
+  refreshPage() {
+    if (this.state.loading == true) {
+      this.setState({ loading: false });
+    }
+  }
+
   render() {
     const title = "Experience the City of Chicago";
-    const hostName = "Host: Noah Lebovic";
-    const description = "Take in the view from the sky-high heights of the Willis Tower, the second-tallest building in the United States. From the 103rd floor, look out over 4 states and the Windy City's urban sprawl, and then test your vertigo on a glass balcony to peer down at the streets and skyscrapers of Chicago beneath your feet. Step into an elevator and be whisked to new heights in just 60 seconds, waiting for the ear-popping sensation as you ascend to the Skydeck at the Willis Tower. Standing 1,353 feet (412 m) above the Midwest metropolis, the Willis Tower’s steel-framed structure was specifically designed to withstand the city's infamous wind.";
+    const hostName = "Noah Lebovic";
+    const experienceTime = "3 Days";
+    const description = "Chicago, on Lake Michigan in Illinois, is among the largest cities in the U.S. Famed for its bold architecture, it has a skyline punctuated by skyscrapers such as the iconic John Hancock Center, 1,451-ft. Willis Tower (formerly the Sears Tower) and the neo-Gothic Tribune Tower. The city is also renowned for its museums, including the Art Institute of Chicago with its noted Impressionist and Post-Impressionist works.";
+    const image = "https://boston-consulting-group-res.cloudinary.com/image/fetch/w_1402,h_792,f_auto/http://image-src.bcg.com/Images/Chicago_72570470_1050x590_tcm-69200.jpg";
+    const cost = "$175";
+    // const activities too
+
+    const activities = activitiesJson.map((activity) =>
+      <Activity name={activity.name} desc={activity.desc} img={activity.img} />
+    );
 
     return (
       <div>
@@ -30,32 +53,20 @@ class Experience extends Component {
 
         <div className="experience">
           <div className="grid">
-            <div className="grid-left">
-              <img src={require("../../assets/tower.jpg")} alt="Hills" align="left" className="resize" />
-            </div>
-            <div className="grid-right">
-              <Paper elevation={4} className="paper">
-                <div className="paper">
-                  <div className="heading">Overview:</div>
-                  <ExperienceOverview guide="Noah Lebovic" time="3 Days" cost="$175" />
-                  <Divider />
-                  <Description heading="Description:" text={description} />
-                </div>
-              </Paper>
-            </div>
+            <img src={image} alt="Hills" align="left" className="resize" onLoad={this.refreshPage} key={this.state.loading} />
+            <Paper elevation={4} className="paper">
+                <div className="heading">Overview:</div>
+                <ExperienceOverview guide={hostName} time={experienceTime} cost={cost} />
+                <Divider />
+                <Description heading="Description:" text={description} />
+            </Paper>
           </div>
 
           <Divider />
 
           <div>
             <h2>Activities:</h2>
-            <Activity name="Activity #1" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus."/>
-            <Divider />
-            <Activity name="Activity #1" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus."/>
-            <Divider />
-            <Activity name="Activity #1" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus."/>
-            <Divider />
-            <Activity name="Activity #1" desc="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus."/>
+            {activities}
             <Divider />
           </div>
         </div>

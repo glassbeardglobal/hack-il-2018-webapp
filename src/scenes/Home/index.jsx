@@ -28,6 +28,7 @@ class Home extends Component {
 
   componentDidMount() {
     const queryParams = queryString.parse(this.props.location.search);
+    console.log('params', queryParams['serialized']);
     const json = urlFetchExperiences(queryParams['serialized']);
     console.log(json);
     // fetch('http://3e44c71f.ngrok.io', {

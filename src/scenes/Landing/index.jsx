@@ -75,7 +75,6 @@ class Landing extends Component {
                   ...currentState.answers.interests,
                   [lowerKey]: (currentState.answers.interests ? !currentState.answers.interests[lowerKey] : true),
                 },
-                // a: console.log(currentState.answers.interests, currentState.answers.interests && !currentState.answers.interests[lowerKey], currentState),
               }
             }))}
           />
@@ -100,7 +99,6 @@ class Landing extends Component {
   handleGlobalKeyPress(e) {
     // Push results page if no more questions - special handling for check final page
     const { questionIndex, questions } = this.state;
-    console.log(questionOrder[questionIndex]);
     if (e.key === 'Enter' && questionIndex === Object.keys(questions).length - 1) {
       // urlFetchExperiences(this.state.answers);
       const serializedBody = serialize(this.state.answers);
@@ -124,7 +122,6 @@ class Landing extends Component {
 
       // Update store
       // Store does not need updating for interests, as store is updated each check
-      console.log('Current question', questionOrder[questionIndex]);
       if (questionOrder[questionIndex] === 'interests') {
         this.setState({
           inputStyle: {
@@ -217,7 +214,6 @@ class Landing extends Component {
 
   render() {
     const { questionIndex, questions, answers, inputStyle } = this.state;
-    console.log(this.props, this.state);
 
     return (
       <div ref={(r) => this.mainRef = r} id="main" tabIndex="1" className="landing" onKeyPress={this.handleGlobalKeyPress.bind(this)}>

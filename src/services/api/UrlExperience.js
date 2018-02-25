@@ -1,13 +1,16 @@
 const urlFetchExperiences = (body) => {
-  fetch(`3e44c71f.ngrok.io`, {
+  console.log('body', body);
+  fetch(`http://3e44c71f.ngrok.io`, {
     method: 'POST',
     body,
     headers: {
       'content-type': 'application/json'
     },
-  }).then((res) => {
+  }).then(async (res) => {
     if (res.ok) {
-      return res.json();
+      const json = await res.json();
+      console.log('Resulting json', json);
+      return json;
     }
     return new Error("Error fetching experiences");
   });

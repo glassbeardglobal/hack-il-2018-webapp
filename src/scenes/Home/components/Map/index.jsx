@@ -30,9 +30,9 @@ class GMap extends Component {
     const markers = this.props.experiences.map(e => {
       let lat = 34.078159; 
       let long = -118.260559;
-      if (e['activities'] && e['activities'].length > 0) {
-        lat = Number(e['activities'][0].latitude);
-        long = Number(e['activities'][0].longitude);
+      if (e['place']['latitude']) {
+        lat = Number(e['place']['latitude']);
+        long = Number(e['place']['longitude']);
       }
       return <Marker key={e.title} position={{ lat: lat, lng: long }} />
     });
@@ -43,7 +43,7 @@ class GMap extends Component {
           ref={mapRef => {
             this.mapRef = mapRef;
           }}
-          defaultZoom={3.8} // 4.8
+          defaultZoom={3.8}
           defaultCenter={this.props.center}
         />
         {markers}

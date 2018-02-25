@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 import Landing from './scenes/Landing';
 import Home from './scenes/Home';
+import Experience from './scenes/Experiences/';
 import reducer from './store';
 
 import './styles/normalize.css';
@@ -20,6 +21,7 @@ class App extends Component {
           <div className="App">
             <Route path="/" exact component={Landing} />
             <Route path="/home" component={Home} />
+            <Route path="/experience" component={Experience} />
           </div>
         </Provider>
       </BrowserRouter>

@@ -46,12 +46,13 @@ class Home extends Component {
   render() {
     const expComps = experiences.map(e => (
       <div
+        key={e.title}
         className="exp-card"
         onClick={() => {
           this.setState({ center: { lat: e.lat, lng: e.lng } });
         }}
       >
-        <ExperienceCard className="exp-card" key={e.title} {...e} />
+        <ExperienceCard className="exp-card" {...e} />
       </div>
     ));
 

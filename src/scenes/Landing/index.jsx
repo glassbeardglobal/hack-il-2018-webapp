@@ -46,7 +46,9 @@ class Landing extends Component {
         `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9) ), url('${image}')`;
     }
 
-    this.inputRef ? this.inputRef.focus() : null;
+    if (this.inputRef) {
+      this.inputRef.focus();
+    }
 
     // Prerender form control labels
     const { answers } = this.state;
@@ -86,7 +88,9 @@ class Landing extends Component {
         width: w,
       }
     });
-    this.inputRef ? this.inputRef.focus() : null;
+    if (this.inputRef) {
+      this.inputRef.focus();
+    }
   }
 
   handleGlobalKeyPress(e) {

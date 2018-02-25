@@ -29,8 +29,23 @@ class Home extends Component {
   componentDidMount() {
     const queryParams = queryString.parse(this.props.location.search);
     console.log('params', queryParams['serialized']);
-    const json = urlFetchExperiences(queryParams['serialized']);
-    console.log(json);
+    const params = queryParams['serialized'];
+    fetch(`http://3e44c71f.ngrok.io`, {
+      method: 'POST',
+      body: params,
+      headers: {
+        'content-type': 'application/json'
+      },
+    }).then(async (res) => {
+      if (res.ok) {
+        const json = await res.json();
+        console.log('Resulting json', json);
+        return json;
+      }
+      return new Error("Error fetching experiences");
+    });
+    // const json = urlFetchExperiences(queryParams['serialized']);
+    // console.log(json);
     // fetch('http://3e44c71f.ngrok.io', {
     //   method: 'GET'
     // }).then((res) => {

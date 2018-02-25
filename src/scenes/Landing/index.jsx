@@ -25,7 +25,9 @@ class Landing extends Component {
       document.getElementById('main').style.backgroundImage =
         `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9) ), url('${image}')`;
     }
-    this.inputRef ? this.inputRef.focus() : null;
+    if (this.inputRef) {
+      this.inputRef.focus();
+    }
   }
 
   expandInput(w) {
@@ -34,7 +36,9 @@ class Landing extends Component {
         width: w,
       }
     });
-    this.inputRef ? this.inputRef.focus() : null;
+    if (this.inputRef) {
+      this.inputRef.focus();
+    }
   }
 
   handleKeyPress(e) {

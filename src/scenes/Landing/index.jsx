@@ -47,6 +47,9 @@ class Landing extends Component {
       inputStyle: {
         width: '40%',
       },
+      // paperStyle: {
+      //   width: '80%',
+      // }
     };
   }
 
@@ -112,6 +115,17 @@ class Landing extends Component {
       this.inputRef.focus();
     }
   }
+
+  // expandPaper(w) {
+  //   this.setState({
+  //     paperStyle: {
+  //       width: w,
+  //     },
+  //   });
+  //   if (this.inputRef) {
+  //     this.inputRef.focus();
+  //   }
+  // }
 
   handleGlobalKeyPress(e) {
     // Push results page if no more questions - special handling for check final page
@@ -180,7 +194,7 @@ class Landing extends Component {
   }
 
   renderChecks = (questions, answers, questionIndex) => (
-    <Paper elevation={2} style={{ width: '80%' }}>
+    <Paper elevation={2} style={{ width: '80%', marginTop: '10vh' }}>
       <div
         style={{
           margin: '5vw',
@@ -216,7 +230,7 @@ class Landing extends Component {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: '20vh',
+            marginTop: '10vh',
           }}
         >
           <Paper elevation={2} style={{ width: '80%' }}>
@@ -282,6 +296,7 @@ class Landing extends Component {
         onKeyPress={this.handleGlobalKeyPress.bind(this)}
       >
         <h1 className="app-name">Xplore</h1>
+        <h2 className="app-phrase">the world with the people who know it best</h2>
         {questions[questionOrder[questionIndex]].type !== 'check'
           ? this.renderInput(inputStyle, questions, answers, questionIndex)
           : this.renderChecks(questions, answers, questionIndex)}

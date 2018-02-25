@@ -49,7 +49,8 @@ class Home extends Component {
         key={e.title}
         className="exp-card"
         onClick={() => {
-          this.setState({ center: { lat: e.lat, lng: e.lng } });
+          this.props.history.push(`/experience?data=${JSON.stringify(e)}`);
+          // this.setState({ center: { lat: e.lat, lng: e.lng } });
         }}
       >
         <ExperienceCard className="exp-card" {...e} />

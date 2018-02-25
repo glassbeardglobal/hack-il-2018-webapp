@@ -5,11 +5,12 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Icon from 'material-ui/Icon';
 import Paper from 'material-ui/Paper';
+import queryString from 'query-string';
 
 import Activity from './components/Activity';
 import Description from './components/Description';
 import ExperienceOverview from './components/ExperienceOverview';
-import json from './activities';
+import descriptions from './descriptions'
 import './styles.css';
 
 class Experience extends Component {
@@ -27,25 +28,39 @@ class Experience extends Component {
     }
   }
 
+  getLength(depart, arrive) {
+    const departDate = new Date(depart);
+    const arriveDate = new Date(arrive);
+    const timeDiff = Math.abs(arriveDate.getTime() - departDate.getTime());
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+  }
+
   render() {
-    const title = json['title'];
+    const queryParams = queryString.parse(this.props.location.search);
+    const json = JSON.parse(queryParams['data']);
+
+    const cityName = json['city'];
     const hostName = json['hostName'];
-    const experienceTime = json['experienceTime'];
-    const description = json['description'];
     const image = json['image'];
     const cost = json['cost'];
     const departAirport = json['flight']['departAirport'];
     const departDate = json['flight']['departDate'];
     const departTime = json['flight']['departTime'];
-    const departTerminal = json['flight']['departTerminal'];
+    const departTerminal = 'E';
     const arriveAirport = json['flight']['arriveAirport'];
     const arriveDate = json['flight']['arriveDate'];
     const arriveTime = json['flight']['arriveTime'];
-    const arriveTerminal = json['flight']['arriveTerminal'];
+    const arriveTerminal = '3';
     const activitiesJson = json['activities'];
 
+
+    const numDays = this.getLength(departDate, arriveDate);
+    const experienceTime = `${numDays} Day${(numDays > 1) ? 's' : ''}`;
+    const title = `Experience the City of ${cityName}`;
+    const description = descriptions.hasOwnProperty(cityName) ? descriptions[cityName] : descriptions['Default'];
+
     const activities = activitiesJson.map((activity) =>
-      <Activity name={activity.name} desc={activity.desc} img={activity.img} />
+      <Activity key={activity.name} name={activity.name} desc={activity.desc} img={activity.img} />
     );
 
     return (
@@ -53,16 +68,14 @@ class Experience extends Component {
         <div className="experience-title">
           <AppBar position="static">
             <Toolbar>
-              <Typography variant="title" color="inherit">
-                {title}
-              </Typography>
+              <Typography variant="title" color="inherit">{title}</Typography>
             </Toolbar>
           </AppBar>
         </div>
 
         <div className="experience">
           <div className="grid">
-            <img src={image} alt="Hills" align="left" className="resize" onLoad={this.refreshPage} key={this.state.loading} />
+            <img src={image} alt="City" align="left" className="resize" onLoad={this.refreshPage} key={this.state.loading} />
             <Paper elevation={4} className="paper">
                 <div className="heading">Overview:</div>
                 <ExperienceOverview guide={hostName} time={experienceTime} cost={cost} />
@@ -72,6 +85,7 @@ class Experience extends Component {
           </div>
 
           <Divider />
+
           <div className="section">
             <h2>Flight:</h2>
             <Paper elevation={4} className="flight-container">
@@ -90,12 +104,14 @@ class Experience extends Component {
               </div>
             </Paper>
           </div>
+
           <Divider />
 
           <div className="section">
             <h2>Activities:</h2>
             {activities}
           </div>
+
           <Divider />
         </div>
       </div>

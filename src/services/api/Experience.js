@@ -1,4 +1,4 @@
-const fetchExperiences = (formData) => {
+const Experience = (formData) => {
   fetch('/api/experiences', {
     method: 'POST',
     body: JSON.stringify(formData),
@@ -14,4 +14,4 @@ const fetchExperiences = (formData) => {
   });
 };
 
-export default fetchExperiences;
+export default Experience;

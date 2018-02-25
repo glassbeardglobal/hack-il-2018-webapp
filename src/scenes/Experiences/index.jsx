@@ -53,7 +53,6 @@ class Experience extends Component {
     const arriveTerminal = '3';
     const activitiesJson = json['activities'];
 
-
     const numDays = this.getLength(departDate, arriveDate);
     const experienceTime = `${numDays} Day${(numDays > 1) ? 's' : ''}`;
     const title = `Experience the City of ${cityName}`;

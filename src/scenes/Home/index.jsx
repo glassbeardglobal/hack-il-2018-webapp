@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import anime from 'animejs';
+import queryString from 'query-string';
 
 import Map from './components/Map';
 import Loader from './components/Loader';
 import ExperienceCard from './components/ExperienceCard';
 import experiences from './experiences';
+import urlFetchExperiences from '../../services/api/UrlExperience';
 
 import './styles.css';
 
@@ -20,12 +22,26 @@ class Home extends Component {
         lat: 40.107511,
         lng: -88.232884,
       },
+      data: [],
     };
   }
 
   componentDidMount() {
-    const tl = anime.timeline();
+    const queryParams = queryString.parse(this.props.location.search);
+    const json = urlFetchExperiences(queryParams['serialized']);
+    console.log(json);
+    // fetch('http://3e44c71f.ngrok.io', {
+    //   method: 'GET'
+    // }).then((res) => {
+    //   if (res.ok) {
+    //     return res.json();
+    //   }
+    //   return new Error("Error fetching experiences");
+    // }).then((data) => {
+    //   this.setState({ data: data });
+    // });
 
+    const tl = anime.timeline();
     tl
       .add({
         targets: '.loader',
@@ -44,6 +60,7 @@ class Home extends Component {
   }
 
   render() {
+    console.log(this.state.data);
     const expComps = experiences.map(e => (
       <div
         key={e.title}

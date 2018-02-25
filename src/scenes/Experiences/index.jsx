@@ -28,25 +28,34 @@ class Experience extends Component {
     }
   }
 
+  getLength(depart, arrive) {
+    const departDate = new Date(depart);
+    const arriveDate = new Date(arrive);
+    const timeDiff = Math.abs(arriveDate.getTime() - departDate.getTime());
+    return Math.ceil(timeDiff / (1000 * 3600 * 24));
+  }
+
   render() {
     const queryParams = queryString.parse(this.props.location.search);
     const json = JSON.parse(queryParams['data']);
 
     const cityName = json['city'];
     const hostName = json['hostName'];
-    const experienceTime = json['experienceTime'];
     const image = json['image'];
     const cost = json['cost'];
     const departAirport = json['flight']['departAirport'];
     const departDate = json['flight']['departDate'];
     const departTime = json['flight']['departTime'];
-    const departTerminal = json['flight']['departTerminal'];
+    const departTerminal = 'E';
     const arriveAirport = json['flight']['arriveAirport'];
     const arriveDate = json['flight']['arriveDate'];
     const arriveTime = json['flight']['arriveTime'];
-    const arriveTerminal = json['flight']['arriveTerminal'];
+    const arriveTerminal = '3';
     const activitiesJson = json['activities'];
 
+
+    const numDays = this.getLength(departDate, arriveDate);
+    const experienceTime = `${numDays} Day${(numDays > 1) ? 's' : ''}`;
     const title = `Experience the City of ${cityName}`;
     const description = descriptions.hasOwnProperty(cityName) ? descriptions[cityName] : descriptions['Default'];
 

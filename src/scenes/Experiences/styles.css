@@ -35,7 +35,7 @@ img.resize {
 
 .grid {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .grid-right {
@@ -44,9 +44,6 @@ img.resize {
 
 .grid-left {
   margin-right: 20px;
-}
-
-.overview {
 }
 
 .overview .section {
@@ -166,5 +163,5 @@ img.resize {
 }
 
 .section {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }

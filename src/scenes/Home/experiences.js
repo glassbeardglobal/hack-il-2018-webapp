@@ -32,8 +32,8 @@ const experiences = [
         "img": "http://www.kaleidoscopeadventures.com/wp-content/uploads/2014/04/chicago_bean_and_life_by_alierturk-d3agi0u.jpg"
       }
     ],
-    lat: 61.11496,
-    lng: -88.22827
+    lat: 41.8781,
+    lng: -87.6298
   },
   {
     "city": "Los Angeles",
@@ -47,7 +47,7 @@ const experiences = [
       "departTime": "3:40 PM",
       "departTerminal": "E",
       "arriveAirport": "ORD",
-      "arriveDate": "03/05/2018",
+      "arriveDate": "02/26/2018",
       "arriveTime": "9:23 AM",
       "arriveTerminal": "3"
     },
@@ -68,8 +68,8 @@ const experiences = [
         "img": "http://www.kaleidoscopeadventures.com/wp-content/uploads/2014/04/chicago_bean_and_life_by_alierturk-d3agi0u.jpg"
       }
     ],
-    lat: 50.11496,
-    lng: -88.22827
+    lat: 34.078159,
+    lng: -118.260559
   }
 ];
 

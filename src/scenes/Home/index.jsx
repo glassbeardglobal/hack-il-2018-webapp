@@ -17,8 +17,8 @@ class Home extends Component {
     this.state = {
       loading: true,
       center: {
-        lat: 40.107511,
-        lng: -88.232884,
+        lat: 39.8283,
+        lng: -98.5795,
       },
       data: [],
     };

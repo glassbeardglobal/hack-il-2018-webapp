@@ -43,7 +43,7 @@ class GMap extends Component {
           ref={mapRef => {
             this.mapRef = mapRef;
           }}
-          defaultZoom={4.8}
+          defaultZoom={3.8} // 4.8
           defaultCenter={this.props.center}
         />
         {markers}

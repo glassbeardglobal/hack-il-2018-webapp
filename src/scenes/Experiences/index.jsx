@@ -37,19 +37,20 @@ class Experience extends Component {
 
   render() {
     const queryParams = queryString.parse(this.props.location.search);
+    console.log(queryParams['data']);
     const json = JSON.parse(queryParams['data']);
 
-    const cityName = json['city'];
-    const hostName = json['hostName'];
-    const image = json['image'];
-    const cost = json['cost'];
-    const departAirport = json['flight']['departAirport'];
-    const departDate = json['flight']['departDate'];
-    const departTime = json['flight']['departTime'];
+    const cityName = json['place']['city'];
+    const hostName = json['guide']['name'];
+    const image = json['place']['pic'];
+    const cost = `$${json['flight']['price']}`;
+    const departAirport = json['flight']['from'];
+    const departDate = json['flight']['departure_date'];
+    const departTime = "3:40 PM";
     const departTerminal = 'E';
-    const arriveAirport = json['flight']['arriveAirport'];
-    const arriveDate = json['flight']['arriveDate'];
-    const arriveTime = json['flight']['arriveTime'];
+    const arriveAirport = json['flight']['to'];
+    const arriveDate = json['flight']['return_date'];
+    const arriveTime = "9:23 AM";
     const arriveTerminal = '3';
     const activitiesJson = json['activities'];
 
@@ -59,7 +60,7 @@ class Experience extends Component {
     const description = descriptions.hasOwnProperty(cityName) ? descriptions[cityName] : descriptions['Default'];
 
     const activities = activitiesJson.map((activity) =>
-      <Activity key={activity.name} name={activity.name} desc={activity.desc} img={activity.img} />
+      <Activity key={activity.businessName} name={activity.businessName} desc={activity.desc} img={activity.pic} />
     );
 
     return (

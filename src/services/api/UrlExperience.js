@@ -1,11 +1,5 @@
-import serialize from '../../utils';
-import queryString from 'query-string';
-
-const urlFetchExperiences = (data) => {
-  console.log('Sending', data);
-  const body = serialize(data);
-  console.log('serialized', body);
-  fetch(`https://hackillinois-amadeus-2018.appspot.com`, {
+const urlFetchExperiences = (body) => {
+  fetch(`3e44c71f.ngrok.io`, {
     method: 'POST',
     body,
     headers: {

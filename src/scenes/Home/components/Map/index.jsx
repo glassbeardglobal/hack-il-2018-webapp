@@ -26,9 +26,16 @@ class GMap extends Component {
   }
 
   render() {
-    const markers = this.props.experiences.map(e => (
-      <Marker key={e.title} position={{ lat: e.lat, lng: e.lng }} />
-    ));
+
+    const markers = this.props.experiences.map(e => {
+      let lat = 34.078159; 
+      let long = -118.260559;
+      if (e['activities'] && e['activities'].length > 0) {
+        lat = Number(e['activities'][0].latitude);
+        long = Number(e['activities'][0].longitude);
+      }
+      return <Marker key={e.title} position={{ lat: lat, lng: long }} />
+    });
 
     return (
       <div>

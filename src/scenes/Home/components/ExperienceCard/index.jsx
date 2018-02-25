@@ -13,14 +13,14 @@ class ExperienceCard extends Component {
   }
 
   render() {
-    const title = `Experience the City of ${this.props.city}`;
-    const description = this.getDescription(this.props.city);
+    const title = `Experience the City of ${this.props.place.city}`;
+    const description = this.getDescription(this.props.place.city);
 
     return (
       <Card>
         <CardMedia
           className="card-media"
-          image={this.props.image}
+          image={this.props.place.pic}
           title="Location Image"
         />
         <CardContent>

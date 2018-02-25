@@ -7,8 +7,6 @@ import queryString from 'query-string';
 import Map from './components/Map';
 import Loader from './components/Loader';
 import ExperienceCard from './components/ExperienceCard';
-import experiences from './experiences';
-import urlFetchExperiences from '../../services/api/UrlExperience';
 
 import './styles.css';
 
@@ -28,8 +26,8 @@ class Home extends Component {
 
   componentDidMount() {
     const queryParams = queryString.parse(this.props.location.search);
-    console.log('params', queryParams['serialized']);
     const params = queryParams['serialized'];
+
     fetch(`http://3e44c71f.ngrok.io`, {
       method: 'POST',
       body: params,
@@ -39,47 +37,37 @@ class Home extends Component {
     }).then(async (res) => {
       if (res.ok) {
         const json = await res.json();
-        console.log('Resulting json', json);
         return json;
       }
       return new Error("Error fetching experiences");
+    }).then((data) => {
+      this.setState({ data: data });
     });
-    // const json = urlFetchExperiences(queryParams['serialized']);
-    // console.log(json);
-    // fetch('http://3e44c71f.ngrok.io', {
-    //   method: 'GET'
-    // }).then((res) => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   return new Error("Error fetching experiences");
-    // }).then((data) => {
-    //   this.setState({ data: data });
-    // });
 
     const tl = anime.timeline();
     tl
       .add({
         targets: '.loader',
         opacity: 0,
-        duration: 1000,
+        duration: 15000,
         offset: 5000,
         easing: 'easeInOutSine',
       })
       .add({
         targets: '.home',
         opacity: 1,
-        duration: 1000,
+        duration: 15000,
         easing: 'easeInOutSine',
         offset: '+= 500',
       });
   }
 
   render() {
-    console.log(this.state.data);
+    const experiences = this.state.data;
+
     const expComps = experiences.map(e => (
       <div
-        key={e.title}
+        key={e.place.city}
         className="exp-card"
         onClick={() => {
           this.props.history.push(`/experience?data=${JSON.stringify(e)}`);

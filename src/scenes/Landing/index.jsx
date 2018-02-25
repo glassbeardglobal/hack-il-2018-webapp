@@ -18,9 +18,9 @@ const interests = ["Zoos",
   "Parks",
   "Nightlife",
   "Museums",
-  "Movies",
   "Festivals",
   "Breweries",
+  "Bars",
   "Arts",
   "Active"];
 var formControlLabels = [];
@@ -67,14 +67,15 @@ class Landing extends Component {
         control={
           <Checkbox
             key={lowerKey}
-            checked={answers[questionOrder[questionIndex]] && answers[questionOrder[questionIndex]][lowerKey]}
+            checked={answers.interests && answers.interests[lowerKey]}
             onChange={() => this.setState(currentState => ({
               answers: {
                 ...currentState.answers,
                 interests: {
                   ...currentState.answers.interests,
-                  [lowerKey]: (currentState.answers.interests ? !currentState.answers[questionOrder[questionIndex]][lowerKey] : true),
-                }
+                  [lowerKey]: (currentState.answers.interests ? !currentState.answers.interests[lowerKey] : true),
+                },
+                // a: console.log(currentState.answers.interests, currentState.answers.interests && !currentState.answers.interests[lowerKey], currentState),
               }
             }))}
           />
@@ -160,7 +161,7 @@ class Landing extends Component {
   renderChecks = (questions, answers, questionIndex) =>
     (
       <Paper elevation={2} style={{width: '80%'}}>
-        <div style={{ marginLeft: '5vw', marginRight: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ margin: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Typography variant="display1" gutterBottom>
             {questions[questionOrder[questionIndex]].q}
           </Typography>
@@ -174,7 +175,7 @@ class Landing extends Component {
   renderInput(inputStyle, questions, answers, questionIndex) {
     if (questionOrder[questionIndex] === 'date') {
       const { date } = this.state.answers;
-      return (<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginLeft: '140px', marginTop: '20vh'}}>
+      return (<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '20vh'}}>
         <Paper elevation={2} style={{width: '80%'}}>
           <div style={{ margin: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Typography variant="display1" gutterBottom>
@@ -182,12 +183,17 @@ class Landing extends Component {
             </Typography>
             <DatePicker
               className="datePicker"
-              onChange={(d) => this.setState({
-                answers: {
-                  ...answers,
-                  date: d,
+              onChange={(d) => {
+                this.setState({
+                  answers: {
+                    ...answers,
+                    date: d,
+                  }
+                });
+                if (this.mainRef) {
+                  this.mainRef.focus();
                 }
-              })}
+              }}
               value={date}
             />
           </div>
@@ -213,7 +219,7 @@ class Landing extends Component {
     console.log(this.props, this.state);
 
     return (
-      <div id="main" className="landing" onKeyPress={this.handleGlobalKeyPress.bind(this)}>
+      <div ref={(r) => this.mainRef = r} id="main" tabIndex="1" className="landing" onKeyPress={this.handleGlobalKeyPress.bind(this)}>
         <h1 className="app-name">xxxplore</h1>
         {questions[questionOrder[questionIndex]].type !== "check"
           ? this.renderInput(inputStyle, questions, answers, questionIndex)

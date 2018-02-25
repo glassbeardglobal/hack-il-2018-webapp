@@ -8,9 +8,11 @@ const urlFetchExperiences = (data) => {
   fetch(`https://hackillinois-amadeus-2018.appspot.com`, {
     method: 'POST',
     body,
+    headers: {
+      'content-type': 'application/json'
+    },
   }).then((res) => {
     if (res.ok) {
-      console.log(res);
       return res.json();
     }
     return new Error("Error fetching experiences");

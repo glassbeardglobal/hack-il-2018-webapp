@@ -1,14 +1,27 @@
 {
-	"0": {
-		"q": "What's your name?",
-		"a": "Noah Lebovic"
-	},
-	"1": {
-		"q": "How old are you?",
-		"a": 19
-	},
-	"2": {
-		"q": "What do you want to do?",
-		"a": "Default not used"
-	}
+  "name": {
+    "q": "What's your name?",
+    "a": "Noah Lebovic",
+    "type": "text"
+  },
+  "initialCity": {
+    "q": "Where will you be departing from?",
+    "a": 19,
+    "type": "text"
+  },
+  "budget": {
+    "q": "What's your budget?",
+    "a": 1000,
+    "type": "text"
+  },
+  "dates": {
+    "q": "When would you like to xxxplore?",
+    "a": "default not used",
+    "type": "daterange"
+  },
+  "interests": {
+      "q": "What do you like to do?",
+      "a": "Default not used",
+      "type": "check"
+  }
 }

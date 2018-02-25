@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "animejs": "^2.2.0",
+    "classnames": "^2.2.5",
     "husky": "^0.14.3",
     "lint-staged": "^7.0.0",
     "material-ui": "^1.0.0-beta.34",

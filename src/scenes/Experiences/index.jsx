@@ -6,6 +6,7 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Icon from 'material-ui/Icon';
 import Paper from 'material-ui/Paper';
+import faker from 'faker';
 
 import Activity from './components/Activity';
 import Description from './components/Description';
@@ -42,7 +43,7 @@ class Experience extends Component {
     console.log(json);
 
     const cityName = json['place']['city'];
-    const hostName = json['guide']['name'];
+    const hostName = (json['guide']['name'] === 'Not selected') ? faker.name.findName() : json['guide']['name'];
     const image = json['place']['pic'];
     const cost = `$${json['flight']['price']}`;
     const departAirport = json['flight']['from'];

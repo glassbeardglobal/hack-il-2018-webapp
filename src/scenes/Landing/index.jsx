@@ -194,7 +194,7 @@ class Landing extends Component {
   }
 
   renderChecks = (questions, answers, questionIndex) => (
-    <Paper elevation={2} style={{ width: '80%' }}>
+    <Paper elevation={2} style={{ width: '80%', marginTop: '10vh' }}>
       <div
         style={{
           margin: '5vw',
@@ -230,7 +230,7 @@ class Landing extends Component {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'center',
-            marginTop: '20vh',
+            marginTop: '10vh',
           }}
         >
           <Paper elevation={2} style={{ width: '80%' }}>

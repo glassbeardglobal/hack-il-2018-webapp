@@ -14,10 +14,15 @@
     "a": 1000,
     "type": "text"
   },
-  "dates": {
+  "date": {
     "q": "When would you like to xxxplore?",
     "a": "default not used",
     "type": "daterange"
+  },
+  "duration": {
+    "q": "How many days would you like to adventure?",
+    "a": 2,
+    "type": "text"
   },
   "interests": {
       "q": "What do you like to do?",

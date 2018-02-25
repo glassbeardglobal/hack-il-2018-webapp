@@ -30,13 +30,13 @@
   /**/
 /*}*/
 
-.datePicker2 {
-  margin-left: 140px;
+.datePicker1 {
+  margin-left: 5%;
 }
 
 .react-date-picker__button__input {
-  color: white;
-  text-color: white;
+  color: black;
+  text-color: black;
   font-weight: 400;
   font-size: 2rem;
   /*border-bottom: 1px solid #fff;*/
@@ -54,11 +54,11 @@
 }
 
 .react-date-picker__button__input__divider {
-  border-bottom: 3px solid #fff;
+  border-bottom: 3px solid #000;
 }
 
 .react-date-picker__button__input__input {
-  border-bottom: 3px solid #fff;
+  border-bottom: 3px solid #000;
 }
 
 

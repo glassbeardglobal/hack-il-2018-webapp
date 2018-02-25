@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Paper, Checkbox, Typography } from 'material-ui';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import airports from 'airport-codes';
-import DatePicker from 'react-date-picker'
+import DatePicker from 'react-date-picker';
 
 import rawQuestions from './questions.json';
 import rawImages from './backgrounds.json';
+import urlFetchExperiences from '../../services/api/UrlExperience';
 import './styles.css';
 
-const questionOrder = ["name", "initialCity", "budget", "dates", "interests"];
+const questionOrder = ["name", "initialCity", "budget", "date", "duration", "interests"];
 const interests = ["Zoos",
   "Wineries",
   "Tours",
@@ -37,8 +38,6 @@ class Landing extends Component {
       inputStyle: {
         width: '40%',
       },
-      dateOne: null,
-      dateTwo: null,
     };
   }
 
@@ -56,7 +55,7 @@ class Landing extends Component {
 
     // Prerender form control labels
     const { answers } = this.state;
-    const questionIndex = 3;
+    const questionIndex = 4;
     for (var i = 0; i < interests.length; i++) {
       formControlLabels.push(this.prerenderFormControlLabel(answers, questionIndex, interests[i]));
     }
@@ -69,15 +68,15 @@ class Landing extends Component {
           <Checkbox
             key={lowerKey}
             checked={answers[questionOrder[questionIndex]] && answers[questionOrder[questionIndex]][lowerKey]}
-            onChange={() => this.setState({
+            onChange={() => this.setState(currentState => ({
               answers: {
-                ...answers,
+                ...currentState.answers,
                 interests: {
-                  ...answers.interests,
-                  [lowerKey]: (answers.interests ? !answers[questionOrder[questionIndex + 1]][lowerKey] : true),
+                  ...currentState.answers.interests,
+                  [lowerKey]: (currentState.answers.interests ? !currentState.answers[questionOrder[questionIndex]][lowerKey] : true),
                 }
               }
-            })}
+            }))}
           />
         }
         label={key}
@@ -100,9 +99,12 @@ class Landing extends Component {
   handleGlobalKeyPress(e) {
     // Push results page if no more questions - special handling for check final page
     const { questionIndex, questions } = this.state;
-
-    if (e.key === 'Enter' && questionIndex + 1 === Object.keys(questions).length - 1) {
+    console.log(questionOrder[questionIndex]);
+    if (e.key === 'Enter' && questionIndex === Object.keys(questions).length - 1) {
+      urlFetchExperiences(this.state.answers);
       this.props.history.push('/home');
+    } else if (e.key === 'Enter' && questionOrder[questionIndex] === 'date') {
+      this.handleKeyPress(e);
     }
   }
 
@@ -120,11 +122,22 @@ class Landing extends Component {
 
       // Update store
       // Store does not need updating for interests, as store is updated each check
-      console.log('CUrrent question', questionOrder[questionIndex]);
+      console.log('Current question', questionOrder[questionIndex]);
       if (questionOrder[questionIndex] === 'interests') {
         this.setState({
           inputStyle: {
             width: '0%',
+          },
+          questionIndex: questionIndex + 1,
+        });
+      } else if (questionOrder[questionIndex] === 'date') {
+        this.setState({
+          inputStyle: {
+            width: '0%',
+          },
+          answers:{
+            ...answers,
+            date: answers.date,
           },
           questionIndex: questionIndex + 1,
         });
@@ -159,20 +172,26 @@ class Landing extends Component {
     )
 
   renderInput(inputStyle, questions, answers, questionIndex) {
-    if (questionOrder[questionIndex] === 'dates') {
-      const { dateOne, dateTwo } = this.state;
-      return (<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginLeft: '140px'}}>
-      <DatePicker
-        className="datePicker"
-        onChange={(d) => this.setState({ dateOne: d})}
-        value={dateOne}
-      />
-        <p className="to">to</p>
-      <DatePicker
-        className="datePicker2"
-        onChange={(d) => this.setState({ dateTwo: d})}
-        value={dateTwo}
-      />
+    if (questionOrder[questionIndex] === 'date') {
+      const { date } = this.state.answers;
+      return (<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginLeft: '140px', marginTop: '20vh'}}>
+        <Paper elevation={2} style={{width: '80%'}}>
+          <div style={{ margin: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Typography variant="display1" gutterBottom>
+              {questions[questionOrder[questionIndex]].q}
+            </Typography>
+            <DatePicker
+              className="datePicker"
+              onChange={(d) => this.setState({
+                answers: {
+                  ...answers,
+                  date: d,
+                }
+              })}
+              value={date}
+            />
+          </div>
+        </Paper>
       </div>)
     } else {
       return (<input

@@ -18,6 +18,51 @@
   text-shadow: 0px 0px 9px black;
 }
 
+.landing .to {
+  color: #cecece;
+  font-weight: 400;
+  text-align: center;
+  font-size: 2rem;
+  text-shadow: 0px 0px 9px black;
+}
+
+/*.datePicker {*/
+  /**/
+/*}*/
+
+.datePicker2 {
+  margin-left: 140px;
+}
+
+.react-date-picker__button__input {
+  color: white;
+  text-color: white;
+  font-weight: 400;
+  font-size: 2rem;
+  /*border-bottom: 1px solid #fff;*/
+  /*background: rgba(200, 200, 200, 0.0);*/
+  /*transition: width 0.5s;*/
+}
+
+.react-date-picker__button {
+  border: 0 none;
+}
+
+.react-date-picker__button__icon svg {
+  fill: white;
+  opacity: 0;
+}
+
+.react-date-picker__button__input__divider {
+  border-bottom: 3px solid #fff;
+}
+
+.react-date-picker__button__input__input {
+  border-bottom: 3px solid #fff;
+}
+
+
+
 .landing .input {
   height: 5vh;
   color: white;

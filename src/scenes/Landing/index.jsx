@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Paper, Checkbox, Typography } from 'material-ui';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
+import airports from 'airport-codes';
+import DatePicker from 'react-date-picker'
 
 import rawQuestions from './questions.json';
 import rawImages from './backgrounds.json';
@@ -34,7 +36,9 @@ class Landing extends Component {
       answers: {},
       inputStyle: {
         width: '40%',
-      }
+      },
+      dateOne: null,
+      dateTwo: null,
     };
   }
 
@@ -105,6 +109,10 @@ class Landing extends Component {
   handleKeyPress(e) {
     const { questionIndex, answers, questions } = this.state;
     if (e.key === 'Enter') {
+      if (questionIndex === 1 && !airports.findWhere({'city': e.target.value})) {
+        alert("Not a valid city! (todo: handle better)");
+        return;
+      }
       // Push results page if no more questions - special handling for textfield final page
       if (questionIndex === Object.keys(questions).length - 1) {
         this.props.history.push('/home');
@@ -150,18 +158,36 @@ class Landing extends Component {
       </Paper>
     )
 
-  renderInput = (inputStyle, questions, answers, questionIndex) =>
-    (<input
-      ref={ (r) => this.inputRef = r }
-      style={ inputStyle }
-      key={ questionIndex }
-      className="input"
-      type="text"
-      placeholder={ questions[questionOrder[questionIndex]].q }
-      value={ answers[questionOrder[questionIndex]] && answers[questionOrder[questionIndex]].a }
-      onKeyPress={ this.handleKeyPress.bind(this) }
-      onMouseEnter={this.expandInput.bind(this, '60%') }
-    />)
+  renderInput(inputStyle, questions, answers, questionIndex) {
+    if (questionOrder[questionIndex] === 'dates') {
+      const { dateOne, dateTwo } = this.state;
+      return (<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginLeft: '140px'}}>
+      <DatePicker
+        className="datePicker"
+        onChange={(d) => this.setState({ dateOne: d})}
+        value={dateOne}
+      />
+        <p className="to">to</p>
+      <DatePicker
+        className="datePicker2"
+        onChange={(d) => this.setState({ dateTwo: d})}
+        value={dateTwo}
+      />
+      </div>)
+    } else {
+      return (<input
+        ref={ (r) => this.inputRef = r }
+        style={ inputStyle }
+        key={ questionIndex }
+        className="input"
+        type="text"
+        placeholder={ questions[questionOrder[questionIndex]].q }
+        value={ answers[questionOrder[questionIndex]] && answers[questionOrder[questionIndex]].a }
+        onKeyPress={ this.handleKeyPress.bind(this) }
+        onMouseEnter={this.expandInput.bind(this, '60%') }
+      />)
+    }
+  }
 
   render() {
     const { questionIndex, questions, answers, inputStyle } = this.state;
@@ -170,7 +196,7 @@ class Landing extends Component {
     return (
       <div id="main" className="landing" onKeyPress={this.handleGlobalKeyPress.bind(this)}>
         <h1 className="app-name">xxxplore</h1>
-        {questions[questionOrder[questionIndex]].type === "text"
+        {questions[questionOrder[questionIndex]].type !== "check"
           ? this.renderInput(inputStyle, questions, answers, questionIndex)
           : this.renderChecks(questions, answers, questionIndex)}
       </div>

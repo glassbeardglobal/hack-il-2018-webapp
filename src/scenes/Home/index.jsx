@@ -24,6 +24,7 @@ class Home extends Component {
       },
       data: [],
       count: 0,
+      cs: 0,
     };
   }
 
@@ -34,8 +35,16 @@ class Home extends Component {
     this.props.getExperiences(params);
   }
 
-  render() {
+  componentDidUpdate() {
     const experiences = this.props.experiences.experiences;
+    let defCenter = this.state.center;
+    if (experiences.length > 0 & this.state.cs === 0) {
+      defCenter = {
+        lat: experiences[0].place.latitude,
+        lng: experiences[0].place.longitude,
+      };
+      this.setState({ center: defCenter, cs: 1 });
+    }
     console.log(experiences);
 
     if (this.props.experiences.fetchSuccess && this.state.count === 0) {
@@ -57,6 +66,10 @@ class Home extends Component {
           offset: '+= 500',
         });
     }
+  }
+
+  render() {
+    const experiences = this.props.experiences.experiences;
 
     const expComps = experiences.map((e, i) => (
       <div

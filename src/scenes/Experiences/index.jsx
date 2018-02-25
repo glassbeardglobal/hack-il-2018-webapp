@@ -5,11 +5,12 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import Icon from 'material-ui/Icon';
 import Paper from 'material-ui/Paper';
+import queryString from 'query-string';
 
 import Activity from './components/Activity';
 import Description from './components/Description';
 import ExperienceOverview from './components/ExperienceOverview';
-import json from './activities';
+import descriptions from './descriptions'
 import './styles.css';
 
 class Experience extends Component {
@@ -28,10 +29,12 @@ class Experience extends Component {
   }
 
   render() {
-    const title = json['title'];
+    const queryParams = queryString.parse(this.props.location.search);
+    const json = JSON.parse(queryParams['data']);
+
+    const cityName = json['city'];
     const hostName = json['hostName'];
     const experienceTime = json['experienceTime'];
-    const description = json['description'];
     const image = json['image'];
     const cost = json['cost'];
     const departAirport = json['flight']['departAirport'];
@@ -44,8 +47,11 @@ class Experience extends Component {
     const arriveTerminal = json['flight']['arriveTerminal'];
     const activitiesJson = json['activities'];
 
+    const title = `Experience the City of ${cityName}`;
+    const description = descriptions.hasOwnProperty(cityName) ? descriptions[cityName] : descriptions['Default'];
+
     const activities = activitiesJson.map((activity) =>
-      <Activity name={activity.name} desc={activity.desc} img={activity.img} />
+      <Activity key={activity.name} name={activity.name} desc={activity.desc} img={activity.img} />
     );
 
     return (
@@ -53,16 +59,14 @@ class Experience extends Component {
         <div className="experience-title">
           <AppBar position="static">
             <Toolbar>
-              <Typography variant="title" color="inherit">
-                {title}
-              </Typography>
+              <Typography variant="title" color="inherit">{title}</Typography>
             </Toolbar>
           </AppBar>
         </div>
 
         <div className="experience">
           <div className="grid">
-            <img src={image} alt="Hills" align="left" className="resize" onLoad={this.refreshPage} key={this.state.loading} />
+            <img src={image} alt="City" align="left" className="resize" onLoad={this.refreshPage} key={this.state.loading} />
             <Paper elevation={4} className="paper">
                 <div className="heading">Overview:</div>
                 <ExperienceOverview guide={hostName} time={experienceTime} cost={cost} />
@@ -72,6 +76,7 @@ class Experience extends Component {
           </div>
 
           <Divider />
+
           <div className="section">
             <h2>Flight:</h2>
             <Paper elevation={4} className="flight-container">
@@ -90,12 +95,14 @@ class Experience extends Component {
               </div>
             </Paper>
           </div>
+
           <Divider />
 
           <div className="section">
             <h2>Activities:</h2>
             {activities}
           </div>
+
           <Divider />
         </div>
       </div>

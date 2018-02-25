@@ -15,7 +15,7 @@
     "type": "text"
   },
   "date": {
-    "q": "When would you like to xxxplore?",
+    "q": "When would you like to Xplore?",
     "a": "default not used",
     "type": "daterange"
   },

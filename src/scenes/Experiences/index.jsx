@@ -3,12 +3,13 @@ import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
+import Icon from 'material-ui/Icon';
 import Paper from 'material-ui/Paper';
 
 import Activity from './components/Activity';
 import Description from './components/Description';
 import ExperienceOverview from './components/ExperienceOverview';
-import activitiesJson from './activities';
+import json from './activities';
 import './styles.css';
 
 class Experience extends Component {
@@ -21,19 +22,27 @@ class Experience extends Component {
   }
 
   refreshPage() {
-    if (this.state.loading == true) {
+    if (this.state.loading === true) {
       this.setState({ loading: false });
     }
   }
 
   render() {
-    const title = "Experience the City of Chicago";
-    const hostName = "Noah Lebovic";
-    const experienceTime = "3 Days";
-    const description = "Chicago, on Lake Michigan in Illinois, is among the largest cities in the U.S. Famed for its bold architecture, it has a skyline punctuated by skyscrapers such as the iconic John Hancock Center, 1,451-ft. Willis Tower (formerly the Sears Tower) and the neo-Gothic Tribune Tower. The city is also renowned for its museums, including the Art Institute of Chicago with its noted Impressionist and Post-Impressionist works.";
-    const image = "https://boston-consulting-group-res.cloudinary.com/image/fetch/w_1402,h_792,f_auto/http://image-src.bcg.com/Images/Chicago_72570470_1050x590_tcm-69200.jpg";
-    const cost = "$175";
-    // const activities too
+    const title = json['title'];
+    const hostName = json['hostName'];
+    const experienceTime = json['experienceTime'];
+    const description = json['description'];
+    const image = json['image'];
+    const cost = json['cost'];
+    const departAirport = json['flight']['departAirport'];
+    const departDate = json['flight']['departDate'];
+    const departTime = json['flight']['departTime'];
+    const departTerminal = json['flight']['departTerminal'];
+    const arriveAirport = json['flight']['arriveAirport'];
+    const arriveDate = json['flight']['arriveDate'];
+    const arriveTime = json['flight']['arriveTime'];
+    const arriveTerminal = json['flight']['arriveTerminal'];
+    const activitiesJson = json['activities'];
 
     const activities = activitiesJson.map((activity) =>
       <Activity name={activity.name} desc={activity.desc} img={activity.img} />
@@ -63,12 +72,31 @@ class Experience extends Component {
           </div>
 
           <Divider />
+            <div>
+              <h2>Flight:</h2>
+              <Paper elevation={4} className="flight-container">
+                <div class="info-container">
+                  <h3 className="flight-info emph">{departAirport}</h3>
+                  <div className="flight-info"><strong>Departing: </strong>{departDate}</div>
+                  <div className="flight-info"><strong>Time: </strong>{departTime}</div>
+                  <div className="flight-info"><strong>Terminal: </strong>{departTerminal}</div>
+                </div>
+                <Icon color="action" fontSize={true} className="flight-icon">airplanemode_active</Icon>
+                <div class="info-container">
+                  <h3 className="flight-info emph">{arriveAirport}</h3>
+                  <div className="flight-info"><strong>Returning: </strong>{arriveDate}</div>
+                  <div className="flight-info"><strong>Time: </strong>{arriveTime}</div>
+                  <div className="flight-info"><strong>Terminal: </strong>{arriveTerminal}</div>
+                </div>
+              </Paper>
+            </div>
+          <Divider />
 
           <div>
             <h2>Activities:</h2>
             {activities}
-            <Divider />
           </div>
+          <Divider />
         </div>
       </div>
     );

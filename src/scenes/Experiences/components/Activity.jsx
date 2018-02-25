@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Paper from 'material-ui/Paper';
-import Divider from 'material-ui/Divider';
 
 import '../styles.css';
 
-class Activity extends Component {
+class Activity extends React.Component {
   constructor(props) {
     super(props);
     this.refreshPage = this.refreshPage.bind(this);

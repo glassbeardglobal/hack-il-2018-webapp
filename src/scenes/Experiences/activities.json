@@ -1,17 +1,35 @@
-[
-  {
-    "name": "Sears Tower",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
-    "img": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Sears_Tower_ss.jpg"
+{
+  "title": "Experience the City of Chicago",
+  "hostName": "Noah Lebovic",
+  "experienceTime": "3 Days",
+  "description": "Chicago, on Lake Michigan in Illinois, is among the largest cities in the U.S. Famed for its bold architecture, it has a skyline punctuated by skyscrapers such as the iconic John Hancock Center, 1,451-ft. Willis Tower (formerly the Sears Tower) and the neo-Gothic Tribune Tower. The city is also renowned for its museums, including the Art Institute of Chicago with its noted Impressionist and Post-Impressionist works.",
+  "image": "https://boston-consulting-group-res.cloudinary.com/image/fetch/w_1402,h_792,f_auto/http://image-src.bcg.com/Images/Chicago_72570470_1050x590_tcm-69200.jpg",
+  "cost": "$175",
+  "flight": {
+    "departAirport": "LAX",
+    "departDate": "02/25/2018",
+    "departTime": "3:40 PM",
+    "departTerminal": "E",
+    "arriveAirport": "ORD",
+    "arriveDate": "03/05/2018",
+    "arriveTime": "9:23 AM",
+    "arriveTerminal": "3"
   },
-  {
-    "name": "Buckingham Fountain",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
-    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/BuckinghamFountain_ChicagoIL.jpg/800px-BuckinghamFountain_ChicagoIL.jpg"
-  },
-  {
-    "name": "The Bean",
-    "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
-    "img": "http://www.kaleidoscopeadventures.com/wp-content/uploads/2014/04/chicago_bean_and_life_by_alierturk-d3agi0u.jpg"
-  }
-]
+  "activities": [
+    {
+      "name": "Sears Tower",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Sears_Tower_ss.jpg"
+    },
+    {
+      "name": "Buckingham Fountain",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
+      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/BuckinghamFountain_ChicagoIL.jpg/800px-BuckinghamFountain_ChicagoIL.jpg"
+    },
+    {
+      "name": "The Bean",
+      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
+      "img": "http://www.kaleidoscopeadventures.com/wp-content/uploads/2014/04/chicago_bean_and_life_by_alierturk-d3agi0u.jpg"
+    }
+  ]
+}

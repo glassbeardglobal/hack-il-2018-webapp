@@ -101,6 +101,35 @@ img.resize {
   width: 100%;
 }
 
+.flight-container {
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  display: flex;
+}
+
+.info-container {
+  text-align: left;
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.flight-info {
+  margin: 8px;
+}
+
+.emph {
+  font-size: 40px;
+  padding-bottom: 12px;
+}
+
+.flight-icon {
+  font-size: 135px;
+}
+
 .activity {
   width: 100%;
   margin-bottom: 28px;

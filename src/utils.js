@@ -1,10 +1,11 @@
-const serialize = (object) => JSON.stringify({
-  duration: object.duration,
-  city: object.initialCity,
-  budget: object.budget,
-  interests: keysToArray(object.interests),
-  date: object.date.getTime() / 1000,
-});
+const serialize = object =>
+  JSON.stringify({
+    duration: object.duration,
+    city: object.initialCity,
+    budget: object.budget,
+    interests: keysToArray(object.interests),
+    date: object.date.getTime() / 1000,
+  });
 
 function keysToArray(object) {
   var array = [];

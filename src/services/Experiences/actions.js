@@ -4,7 +4,7 @@ export const GET_EXPERIENCES = 'GET_EXPERIENCES';
 export const RECIEVE_EXPERIENCES = 'RECEIVE_EXPERIENCES';
 
 const getExperiences = () => ({
-  type: GET_EXPERIENCES
+  type: GET_EXPERIENCES,
 });
 
 const recieveExperiments = (success, experiences, message) => ({
@@ -14,8 +14,8 @@ const recieveExperiments = (success, experiences, message) => ({
   message,
 });
 
-export const fetchExperiences = (formData) => {
-  return (dispatch) => {
+export const fetchExperiences = formData => {
+  return dispatch => {
     dispatch(getExperiences());
     fetchExp(formData)
       .then(data => {

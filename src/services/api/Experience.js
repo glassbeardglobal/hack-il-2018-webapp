@@ -1,16 +1,17 @@
-const Experience = (formData) => {
-  fetch('/api/experiences', {
+const Experience = formData => {
+  return fetch(`http://3e44c71f.ngrok.io`, {
     method: 'POST',
-    body: JSON.stringify(formData),
+    body: formData,
     headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
+      Accept: 'application/json',
+      'content-type': 'application/json',
     },
-  }).then((res) => {
+  }).then(async res => {
     if (res.ok) {
-      return res.json();
+      const json = await res.json();
+      return json;
     }
-    return new Error("Error fetching experiences");
+    return new Error('Error fetching experiences');
   });
 };
 

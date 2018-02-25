@@ -25,8 +25,8 @@
     "type": "text"
   },
   "interests": {
-      "q": "What do you like to do?",
-      "a": "Default not used",
-      "type": "check"
+    "q": "What do you like to do?",
+    "a": "Default not used",
+    "type": "check"
   }
 }

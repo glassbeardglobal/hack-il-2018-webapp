@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 
@@ -11,7 +12,7 @@ import reducer from './store';
 import './styles/normalize.css';
 import './styles/base.css';
 
-const store = createStore(reducer);
+const store = createStore(reducer, applyMiddleware(thunk));
 
 class App extends Component {
   render() {
@@ -21,7 +22,7 @@ class App extends Component {
           <div className="App">
             <Route path="/" exact component={Landing} />
             <Route path="/home" component={Home} />
-            <Route path="/experience" component={Experience} />
+            <Route path="/experience/:id" component={Experience} />
           </div>
         </Provider>
       </BrowserRouter>

@@ -9,20 +9,29 @@ import rawImages from './backgrounds.json';
 import serialize from '../../utils';
 import './styles.css';
 
-const questionOrder = ["name", "initialCity", "budget", "date", "duration", "interests"];
-const interests = ["Zoos",
-  "Wineries",
-  "Tours",
-  "Shopping",
-  "Food",
-  "Parks",
-  "Nightlife",
-  "Museums",
-  "Festivals",
-  "Breweries",
-  "Bars",
-  "Arts",
-  "Active"];
+const questionOrder = [
+  'name',
+  'initialCity',
+  'budget',
+  'date',
+  'duration',
+  'interests',
+];
+const interests = [
+  'Zoos',
+  'Wineries',
+  'Tours',
+  'Shopping',
+  'Food',
+  'Parks',
+  'Nightlife',
+  'Museums',
+  'Festivals',
+  'Breweries',
+  'Bars',
+  'Arts',
+  'Active',
+];
 var formControlLabels = [];
 
 class Landing extends Component {
@@ -45,8 +54,9 @@ class Landing extends Component {
     // Random background image
     const image = rawImages[Math.floor(Math.random() * 4)];
     if (document.getElementById('main')) {
-      document.getElementById('main').style.backgroundImage =
-        `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9) ), url('${image}')`;
+      document.getElementById(
+        'main'
+      ).style.backgroundImage = `linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.9) ), url('${image}')`;
     }
 
     if (this.inputRef) {
@@ -57,39 +67,46 @@ class Landing extends Component {
     const { answers } = this.state;
     const questionIndex = 4;
     for (var i = 0; i < interests.length; i++) {
-      formControlLabels.push(this.prerenderFormControlLabel(answers, questionIndex, interests[i]));
+      formControlLabels.push(
+        this.prerenderFormControlLabel(answers, questionIndex, interests[i])
+      );
     }
   }
 
   prerenderFormControlLabel(answers, questionIndex, key) {
     const lowerKey = key.toLowerCase();
-    return( <FormControlLabel
+    return (
+      <FormControlLabel
+        key={lowerKey}
         control={
           <Checkbox
             key={lowerKey}
             checked={answers.interests && answers.interests[lowerKey]}
-            onChange={() => this.setState(currentState => ({
-              answers: {
-                ...currentState.answers,
-                interests: {
-                  ...currentState.answers.interests,
-                  [lowerKey]: (currentState.answers.interests ? !currentState.answers.interests[lowerKey] : true),
+            onChange={() =>
+              this.setState(currentState => ({
+                answers: {
+                  ...currentState.answers,
+                  interests: {
+                    ...currentState.answers.interests,
+                    [lowerKey]: currentState.answers.interests
+                      ? !currentState.answers.interests[lowerKey]
+                      : true,
+                  },
                 },
-              }
-            }))}
+              }))
+            }
           />
         }
         label={key}
-        // style={{ marginLeft: '5vw', marginRight: '5vw' }}
       />
     );
-}
+  }
 
   expandInput(w) {
     this.setState({
       inputStyle: {
         width: w,
-      }
+      },
     });
     if (this.inputRef) {
       this.inputRef.focus();
@@ -99,7 +116,10 @@ class Landing extends Component {
   handleGlobalKeyPress(e) {
     // Push results page if no more questions - special handling for check final page
     const { questionIndex, questions } = this.state;
-    if (e.key === 'Enter' && questionIndex === Object.keys(questions).length - 1) {
+    if (
+      e.key === 'Enter' &&
+      questionIndex === Object.keys(questions).length - 1
+    ) {
       const serializedBody = serialize(this.state.answers);
       // urlFetchExperiences(this.state.answers);
       this.props.history.push(`/home?serialized=${serializedBody}`);
@@ -111,8 +131,11 @@ class Landing extends Component {
   handleKeyPress(e) {
     const { questionIndex, answers, questions } = this.state;
     if (e.key === 'Enter') {
-      if (questionIndex === 1 && !airports.findWhere({'city': e.target.value})) {
-        alert("Not a valid city! (todo: handle better)");
+      if (
+        questionIndex === 1 &&
+        !airports.findWhere({ city: e.target.value })
+      ) {
+        alert('Not a valid city! (todo: handle better)');
         return;
       }
       // Push results page if no more questions - special handling for textfield final page
@@ -134,7 +157,7 @@ class Landing extends Component {
           inputStyle: {
             width: '0%',
           },
-          answers:{
+          answers: {
             ...answers,
             date: answers.date,
           },
@@ -147,7 +170,7 @@ class Landing extends Component {
           },
           answers: {
             ...answers,
-            [questionOrder[questionIndex]]: e.target.value
+            [questionOrder[questionIndex]]: e.target.value,
           },
           questionIndex: questionIndex + 1,
         });
@@ -156,59 +179,94 @@ class Landing extends Component {
     }
   }
 
-  renderChecks = (questions, answers, questionIndex) =>
-    (
-      <Paper elevation={2} style={{width: '80%'}}>
-        <div style={{ margin: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Typography variant="display1" gutterBottom>
-            {questions[questionOrder[questionIndex]].q}
-          </Typography>
-          <FormGroup row style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            {formControlLabels}
-          </FormGroup>
-        </div>
-      </Paper>
-    )
+  renderChecks = (questions, answers, questionIndex) => (
+    <Paper elevation={2} style={{ width: '80%' }}>
+      <div
+        style={{
+          margin: '5vw',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Typography variant="display1" gutterBottom>
+          {questions[questionOrder[questionIndex]].q}
+        </Typography>
+        <FormGroup
+          row
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {formControlLabels}
+        </FormGroup>
+      </div>
+    </Paper>
+  );
 
   renderInput(inputStyle, questions, answers, questionIndex) {
     if (questionOrder[questionIndex] === 'date') {
       const { date } = this.state.answers;
-      return (<div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: '20vh'}}>
-        <Paper elevation={2} style={{width: '80%'}}>
-          <div style={{ margin: '5vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Typography variant="display1" gutterBottom>
-              {questions[questionOrder[questionIndex]].q}
-            </Typography>
-            <DatePicker
-              className="datePicker"
-              onChange={(d) => {
-                this.setState({
-                  answers: {
-                    ...answers,
-                    date: d,
-                  }
-                });
-                if (this.mainRef) {
-                  this.mainRef.focus();
-                }
+      return (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginTop: '20vh',
+          }}
+        >
+          <Paper elevation={2} style={{ width: '80%' }}>
+            <div
+              style={{
+                margin: '5vw',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
-              value={date}
-            />
-          </div>
-        </Paper>
-      </div>)
+            >
+              <Typography variant="display1" gutterBottom>
+                {questions[questionOrder[questionIndex]].q}
+              </Typography>
+              <DatePicker
+                className="datePicker"
+                onChange={d => {
+                  this.setState({
+                    answers: {
+                      ...answers,
+                      date: d,
+                    },
+                  });
+                  if (this.mainRef) {
+                    this.mainRef.focus();
+                  }
+                }}
+                value={date}
+              />
+            </div>
+          </Paper>
+        </div>
+      );
     } else {
-      return (<input
-        ref={ (r) => this.inputRef = r }
-        style={ inputStyle }
-        key={ questionIndex }
-        className="input"
-        type="text"
-        placeholder={ questions[questionOrder[questionIndex]].q }
-        value={ answers[questionOrder[questionIndex]] && answers[questionOrder[questionIndex]].a }
-        onKeyPress={ this.handleKeyPress.bind(this) }
-        onMouseEnter={this.expandInput.bind(this, '60%') }
-      />)
+      return (
+        <input
+          ref={r => (this.inputRef = r)}
+          style={inputStyle}
+          key={questionIndex}
+          className="input"
+          type="text"
+          placeholder={questions[questionOrder[questionIndex]].q}
+          value={
+            answers[questionOrder[questionIndex]] &&
+            answers[questionOrder[questionIndex]].a
+          }
+          onKeyPress={this.handleKeyPress.bind(this)}
+          onMouseEnter={this.expandInput.bind(this, '60%')}
+        />
+      );
     }
   }
 
@@ -216,9 +274,15 @@ class Landing extends Component {
     const { questionIndex, questions, answers, inputStyle } = this.state;
 
     return (
-      <div ref={(r) => this.mainRef = r} id="main" tabIndex="1" className="landing" onKeyPress={this.handleGlobalKeyPress.bind(this)}>
+      <div
+        ref={r => (this.mainRef = r)}
+        id="main"
+        tabIndex="1"
+        className="landing"
+        onKeyPress={this.handleGlobalKeyPress.bind(this)}
+      >
         <h1 className="app-name">xxxplore</h1>
-        {questions[questionOrder[questionIndex]].type !== "check"
+        {questions[questionOrder[questionIndex]].type !== 'check'
           ? this.renderInput(inputStyle, questions, answers, questionIndex)
           : this.renderChecks(questions, answers, questionIndex)}
       </div>

@@ -2,7 +2,8 @@
   "city": "Los Angeles",
   "hostName": "Noah Lebovic",
   "experienceTime": "3 Days",
-  "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Los_Angeles%2C_Winter_2016.jpg/1920px-Los_Angeles%2C_Winter_2016.jpg",
+  "image":
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Los_Angeles%2C_Winter_2016.jpg/1920px-Los_Angeles%2C_Winter_2016.jpg",
   "cost": "$175",
   "flight": {
     "departAirport": "LAX",
@@ -17,18 +18,24 @@
   "activities": [
     {
       "name": "Sears Tower",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
-      "img": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Sears_Tower_ss.jpg"
+      "desc":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
+      "img":
+        "https://upload.wikimedia.org/wikipedia/commons/b/ba/Sears_Tower_ss.jpg"
     },
     {
       "name": "Buckingham Fountain",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
-      "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/BuckinghamFountain_ChicagoIL.jpg/800px-BuckinghamFountain_ChicagoIL.jpg"
+      "desc":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
+      "img":
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/BuckinghamFountain_ChicagoIL.jpg/800px-BuckinghamFountain_ChicagoIL.jpg"
     },
     {
       "name": "The Bean",
-      "desc": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
-      "img": "http://www.kaleidoscopeadventures.com/wp-content/uploads/2014/04/chicago_bean_and_life_by_alierturk-d3agi0u.jpg"
+      "desc":
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque semper nisl vitae odio dapibus, a venenatis est placerat. Donec congue bibendum leo, vel varius purus.",
+      "img":
+        "http://www.kaleidoscopeadventures.com/wp-content/uploads/2014/04/chicago_bean_and_life_by_alierturk-d3agi0u.jpg"
     }
   ]
 }

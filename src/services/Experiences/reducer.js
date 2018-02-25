@@ -15,7 +15,7 @@ function experiences(state = defaultState, action) {
         return Object.assign({}, state, {
           fetching: false,
           fetchSuccess: true,
-          experiences: action.experiences
+          experiences: action.experiences,
         });
       } else {
         return Object.assign({}, state, {

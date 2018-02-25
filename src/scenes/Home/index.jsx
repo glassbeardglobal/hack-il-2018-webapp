@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Drawer from 'material-ui/Drawer';
 import Divider from 'material-ui/Divider';
 import anime from 'animejs';
@@ -7,6 +8,7 @@ import queryString from 'query-string';
 import Map from './components/Map';
 import Loader from './components/Loader';
 import ExperienceCard from './components/ExperienceCard';
+import { fetchExperiences } from '../../services/Experiences/actions';
 
 import './styles.css';
 
@@ -28,21 +30,7 @@ class Home extends Component {
     const queryParams = queryString.parse(this.props.location.search);
     const params = queryParams['serialized'];
 
-    fetch(`http://3e44c71f.ngrok.io`, {
-      method: 'POST',
-      body: params,
-      headers: {
-        'content-type': 'application/json'
-      },
-    }).then(async (res) => {
-      if (res.ok) {
-        const json = await res.json();
-        return json;
-      }
-      return new Error("Error fetching experiences");
-    }).then((data) => {
-      this.setState({ data: data });
-    });
+    this.props.getExperiences(params);
 
     const tl = anime.timeline();
     tl
@@ -63,18 +51,26 @@ class Home extends Component {
   }
 
   render() {
-    const experiences = this.state.data;
+    const experiences = this.props.experiences.experiences;
+    console.log(experiences);
 
-    const expComps = experiences.map(e => (
+    const expComps = experiences.map((e, i) => (
       <div
         key={e.place.city}
         className="exp-card"
         onClick={() => {
-          this.props.history.push(`/experience?data=${JSON.stringify(e)}`);
-          // this.setState({ center: { lat: e.lat, lng: e.lng } });
+          this.setState({
+            center: { lat: e.place.latitude, lng: e.place.longitude },
+          });
         }}
       >
-        <ExperienceCard className="exp-card" {...e} />
+        <ExperienceCard
+          className="exp-card"
+          {...e}
+          btnClick={() => {
+            this.props.history.push(`/experience/${i}`);
+          }}
+        />
       </div>
     ));
 
@@ -84,13 +80,6 @@ class Home extends Component {
           <Loader />
         </div>
         <div className="home">
-          {/*<AppBar className="appbar">
-            <Toolbar>
-              <Typography variant="title" color="inherit" noWrap>
-                Persistent drawer
-              </Typography>
-            </Toolbar>
-          </AppBar>*/}
           <div className="main">
             <Map center={this.state.center} experiences={experiences} />
           </div>
@@ -107,4 +96,12 @@ class Home extends Component {
   }
 }
 
-export default Home;
+const mapStateToProps = state => ({
+  experiences: state.experiences,
+});
+
+const mapDispatchToProps = dispatch => ({
+  getExperiences: formData => dispatch(fetchExperiences(formData)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

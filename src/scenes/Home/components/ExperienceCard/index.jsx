@@ -8,8 +8,12 @@ import descriptions from '../../descriptions';
 
 class ExperienceCard extends Component {
   getDescription(city) {
-    const longDesc = descriptions.hasOwnProperty(city) ? descriptions[city] : descriptions['Default'];
-    return (longDesc.length >= 174) ? `${longDesc.substring(0, 174)}...` : longDesc;
+    const longDesc = descriptions.hasOwnProperty(city)
+      ? descriptions[city]
+      : descriptions['Default'];
+    return longDesc.length >= 174
+      ? `${longDesc.substring(0, 174)}...`
+      : longDesc;
   }
 
   render() {
@@ -30,7 +34,7 @@ class ExperienceCard extends Component {
           <Typography component="p">{description}</Typography>
         </CardContent>
         <CardActions>
-          <Button size="small" color="primary">
+          <Button size="small" color="primary" onClick={this.props.btnClick}>
             Learn More
           </Button>
         </CardActions>

@@ -18,7 +18,9 @@ class GMap extends Component {
   }
 
   componentDidUpdate() {
-    setTimeout(() => this.setCenter(this.props.center), 100);
+    if (this.props.center.lat && this.props.center.lng) {
+      setTimeout(() => this.setCenter(this.props.center), 100);
+    }
   }
 
   setCenter(center) {
@@ -26,15 +28,14 @@ class GMap extends Component {
   }
 
   render() {
-
     const markers = this.props.experiences.map(e => {
-      let lat = 34.078159; 
+      let lat = 34.078159;
       let long = -118.260559;
       if (e['place']['latitude']) {
         lat = Number(e['place']['latitude']);
         long = Number(e['place']['longitude']);
       }
-      return <Marker key={e.title} position={{ lat: lat, lng: long }} />
+      return <Marker key={e.place.city} position={{ lat: lat, lng: long }} />;
     });
 
     return (

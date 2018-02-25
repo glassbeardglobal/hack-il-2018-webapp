@@ -7,8 +7,8 @@ function ExperienceOverview(props) {
   return (
     <div className="overview">
       <div className="section">
-        <Icon color="action">location_on</Icon>
-        <span className="info">{props.location}</span>
+        <Icon color="action">person</Icon>
+        <span className="info">{props.guide}</span>
       </div>
       <div className="section">
         <Icon color="action">access_time</Icon>

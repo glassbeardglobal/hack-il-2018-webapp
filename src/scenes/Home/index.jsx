@@ -40,22 +40,14 @@ class Home extends Component {
       if (res.ok) {
         const json = await res.json();
         console.log('Resulting json', json);
+        this.setState({
+          json,
+          loading: false,
+        });
         return json;
       }
       return new Error("Error fetching experiences");
     });
-    // const json = urlFetchExperiences(queryParams['serialized']);
-    // console.log(json);
-    // fetch('http://3e44c71f.ngrok.io', {
-    //   method: 'GET'
-    // }).then((res) => {
-    //   if (res.ok) {
-    //     return res.json();
-    //   }
-    //   return new Error("Error fetching experiences");
-    // }).then((data) => {
-    //   this.setState({ data: data });
-    // });
 
     const tl = anime.timeline();
     tl

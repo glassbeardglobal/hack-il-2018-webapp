@@ -29,8 +29,8 @@ class GMap extends Component {
 
   render() {
     const markers = this.props.experiences.map(e => {
-      let lat = 34.078159;
-      let long = -118.260559;
+      let lat = NaN;
+      let long = NaN;
       if (e['place']['latitude']) {
         lat = Number(e['place']['latitude']);
         long = Number(e['place']['longitude']);

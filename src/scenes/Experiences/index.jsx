@@ -72,27 +72,27 @@ class Experience extends Component {
           </div>
 
           <Divider />
-            <div>
-              <h2>Flight:</h2>
-              <Paper elevation={4} className="flight-container">
-                <div class="info-container">
-                  <h3 className="flight-info emph">{departAirport}</h3>
-                  <div className="flight-info"><strong>Departing: </strong>{departDate}</div>
-                  <div className="flight-info"><strong>Time: </strong>{departTime}</div>
-                  <div className="flight-info"><strong>Terminal: </strong>{departTerminal}</div>
-                </div>
-                <Icon color="action" fontSize={true} className="flight-icon">airplanemode_active</Icon>
-                <div class="info-container">
-                  <h3 className="flight-info emph">{arriveAirport}</h3>
-                  <div className="flight-info"><strong>Returning: </strong>{arriveDate}</div>
-                  <div className="flight-info"><strong>Time: </strong>{arriveTime}</div>
-                  <div className="flight-info"><strong>Terminal: </strong>{arriveTerminal}</div>
-                </div>
-              </Paper>
-            </div>
+          <div className="section">
+            <h2>Flight:</h2>
+            <Paper elevation={4} className="flight-container">
+              <div className="info-container">
+                <h3 className="flight-info emph">{departAirport}</h3>
+                <div className="flight-info"><strong>Departing: </strong>{departDate}</div>
+                <div className="flight-info"><strong>Time: </strong>{departTime}</div>
+                <div className="flight-info"><strong>Terminal: </strong>{departTerminal}</div>
+              </div>
+              <Icon color="action" fontSize={true} className="flight-icon">airplanemode_active</Icon>
+              <div className="info-container">
+                <h3 className="flight-info emph">{arriveAirport}</h3>
+                <div className="flight-info"><strong>Returning: </strong>{arriveDate}</div>
+                <div className="flight-info"><strong>Time: </strong>{arriveTime}</div>
+                <div className="flight-info"><strong>Terminal: </strong>{arriveTerminal}</div>
+              </div>
+            </Paper>
+          </div>
           <Divider />
 
-          <div>
+          <div className="section">
             <h2>Activities:</h2>
             {activities}
           </div>

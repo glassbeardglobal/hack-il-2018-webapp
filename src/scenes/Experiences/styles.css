@@ -35,7 +35,7 @@ img.resize {
 
 .grid {
   display: flex;
-  padding-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .grid-right {
@@ -163,4 +163,8 @@ img.resize {
 
 .activity .info {
   margin: 12px;
+}
+
+.section {
+  margin-bottom: 20px;
 }
